@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.alibaba.fastjson.JSONObject;
 import com.mybaits.pojo.User;
 import com.mybaits.service.IUserService;
 
@@ -49,4 +50,28 @@ public class UserController {
 	  List<User> users =userService.datas();
 	  return users;
 	}
+	
+	/**
+	 * 新增页面
+	 */
+	@RequestMapping("/saveOrUpdate")
+	public ModelAndView saveOrUpdate(){
+		ModelAndView mav=new ModelAndView();
+		mav.setViewName("/user/saveOrUpdate");
+		return mav;
+	}
+	@ResponseBody
+	@RequestMapping("/xSaveOrUpdate")
+	public JSONObject xSaveOrUpdate(User user){
+		JSONObject json=new JSONObject();
+		if(!"".equals(user.getId()) && null!=user.getId()){
+		   userService.update(user);
+		   json.put("message", "更新成功");
+		}else{
+		   userService.save(user);
+		   json.put("message", "新增成功");
+		}
+		json.put("error", "false");
+		return json;
+	} 
 }

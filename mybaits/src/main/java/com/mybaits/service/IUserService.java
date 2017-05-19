@@ -31,4 +31,14 @@ public interface IUserService {
 	 */
 	List<User> datas();
 
+	/**
+	 * @param user
+	 */
+	void update(User user);
+
+	/**
+	 * @param user
+	 */
+	void save(User user);
+
 }

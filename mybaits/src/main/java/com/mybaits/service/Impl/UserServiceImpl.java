@@ -43,4 +43,12 @@ public class UserServiceImpl implements IUserService{
 		List<User> users= userMapper.selectByExample(example);
 		return users;
 	}
+	@Override
+	public void update(User user) {
+		userMapper.updateByPrimaryKey(user);
+	}
+	@Override
+	public void save(User user) {
+		userMapper.insert(user);
+	}
 }
